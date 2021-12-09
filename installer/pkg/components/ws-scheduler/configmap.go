@@ -83,7 +83,7 @@ func configmap(ctx *common.RenderContext) ([]runtime.Object, error) {
 					PrivateKey:  "/ws-manager-client-tls-certs/tls.key",
 				},
 			},
-			WorkspaceImage:     common.ImageName("", workspace.DefaultWorkspaceImage, workspace.DefaultWorkspaceImageVersion),
+			WorkspaceImage:     common.ImageName(common.ThirdPartyContainerRepo(ctx.Config.Repository, ""), workspace.DefaultWorkspaceImage, workspace.DefaultWorkspaceImageVersion),
 			IDEImage:           common.ImageName(ctx.Config.Repository, workspace.CodeIDEImage, workspace.CodeIDEImageStableVersion),
 			SupervisorImage:    common.ImageName(ctx.Config.Repository, workspace.SupervisorImage, ctx.VersionManifest.Components.Workspace.Supervisor.Version),
 			FeatureFlags:       nil,
