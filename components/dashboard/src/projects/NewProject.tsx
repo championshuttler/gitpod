@@ -238,7 +238,7 @@ export default function NewProject() {
         if (!selectedAccount && user && user.name && user.avatarUrl) {
             result.push({
                 title: "user",
-                customContent: renderItemContent(`${user?.name} (${selectedProviderHost})`, user?.avatarUrl),
+                customContent: renderItemContent(user?.name, user?.avatarUrl),
                 separator: true,
             })
         }
@@ -276,15 +276,16 @@ export default function NewProject() {
         const showSearchInput = !!repoSearchFilter || filteredRepos.length > 0;
 
         const renderRepos = () => (<>
-            <p className="text-gray-500 text-center text-base">Projects are used to manage prebuilds and see workspaces for your repository. <a href="https://www.gitpod.io/docs/teams-and-projects" rel="noopener" className="gp-link">Learn more</a></p>
-            <div className={`mt-10 border rounded-xl border-gray-100 dark:border-gray-800 flex-col`}>
-                <div className="px-8 pt-8 flex flex-col space-y-2" data-analytics='{"label":"Identity"}'>
+            <p className="text-gray-500 text-center text-base">Projects allow you to manage prebuilds and workspaces for your repository. <a href="https://www.gitpod.io/docs/teams-and-projects" rel="noopener" className="gp-link">Learn more</a></p>
+            <p className="text-gray-500 text-center text-base mt-12">User or organization on <b>{selectedProviderHost}</b> (<a className="gp-link cursor-pointer" onClick={() => setShowGitProviders(true)}>change</a>)</p>
+            <div className={`mt-2 border rounded-xl border-gray-100 dark:border-gray-800 flex-col`}>
+                <div className="px-8 pt-5 flex flex-col space-y-2" data-analytics='{"label":"Identity"}'>
                     <ContextMenu classes="w-full left-0 cursor-pointer" menuEntries={getDropDownEntries(accounts)}>
                         <div className="w-full">
                             {!selectedAccount && (
                                 <>
                                     <img src={user?.avatarUrl} className="rounded-full w-6 h-6 absolute top-1/4 left-4" />
-                                    <input className="w-full px-12 cursor-pointer font-semibold" readOnly type="text" value={`${user?.name} (${selectedProviderHost})`}></input>
+                                    <input className="w-full px-12 cursor-pointer font-semibold" readOnly type="text" value={user?.name}></input>
                                 </>
                             )}
                             {icon && (
@@ -344,7 +345,7 @@ export default function NewProject() {
 
             </div>
             <p className="text-left w-full mt-12 text-gray-500">
-                <strong>Teams &amp; Projects</strong> are currently in Beta. <a href="https://github.com/gitpod-io/gitpod/issues/5095" target="gitpod-feedback-issue" rel="noopener" className="gp-link">Send feedback</a> or open a <a href="/workspaces" className="gp-link">New Workspace</a> with an example repository.
+                <strong>Teams &amp; Projects</strong> are currently in Beta. <a href="https://github.com/gitpod-io/gitpod/issues/5095" target="gitpod-feedback-issue" rel="noopener" className="gp-link">Send feedback</a>
             </p>
         </>
         );
